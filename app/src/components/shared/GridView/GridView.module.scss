@@ -1,0 +1,109 @@
+.container {
+    flex: 1;
+    max-width: 100%;
+    justify-content: center;
+}
+
+.item_box {
+    position: static;
+    display: grid;
+    max-width: 100%;
+    padding: 20px;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    justify-items: center;
+    gap: 20px;
+}
+
+.list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: contents;
+}
+
+.container_item_card {
+    cursor: pointer;
+    display: flex;
+    width: 250px;
+    height: 250px;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    flex-direction: column;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    opacity: 1;
+    /* Initially hidden */
+    transform: translateY(20px);
+    /* Slightly offset to create a sliding effect */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+
+
+    &:hover {
+        background-color: darken(rgb(145, 250, 130), 10%);
+    }
+
+    &.hidden {
+        opacity: 0;
+        /* Fully hidden */
+        transform: translateY(20px);
+        /* Maintain sliding effect */
+
+    }
+
+    &.show {
+        opacity: 1;
+        /* Fully visible */
+        transform: translateY(0);
+        /* Reset offset */
+    }
+}
+
+.view_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+}
+
+.view_txt {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.button_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 90px;
+    padding: 20px;
+    cursor: pointer;
+
+}
+
+.title_button {
+    position: absolute;
+    text-align: center;
+}

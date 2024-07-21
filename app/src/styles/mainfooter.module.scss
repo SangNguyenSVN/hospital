@@ -1,0 +1,138 @@
+.container {
+    position: static;
+    backdrop-filter: blur(10px);
+    width: 100%;
+}
+
+.main_footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+.nav {
+    flex-grow: 0.5;
+    display: grid;
+    justify-content: center;
+}
+
+.main_footer_list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 150%;
+    justify-self: flex-end;
+}
+
+.main_footer_list_name {
+    font-weight: bold;
+    color: #000;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 5px;
+}
+
+.main_footer_list_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.main_footer_list_item_name {
+    cursor: pointer;
+    color: #000;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 5px;
+    text-decoration: none;
+    display: contents;
+
+    &:hover {
+        color: rgb(0, 100, 240);
+        transform: scale(1.05);
+    }
+}
+
+.left_content {
+    max-width: 100%;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+}
+
+@media (max-width: 1024px) {
+    .logo {
+        margin-bottom: 10px;
+        align-self: center;
+    }
+
+    .nav {
+        width: 100%;
+    }
+
+    .main_footer_list {
+        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(384px, 1fr));
+        align-items: center;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .main_footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav {
+        width: 100%;
+    }
+    .main_footer_list_name{
+        text-align: center;
+    }
+    .main_footer_list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        justify-content: center;
+    }
+
+    .main_footer_list_item {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .main_footer {
+        padding: 5px 10px;
+    }
+
+    .main_footer_list {
+        grid-template-columns: 1fr;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .main_footer_list_item {
+        width: 100%;
+        justify-content: center;
+    }
+}
