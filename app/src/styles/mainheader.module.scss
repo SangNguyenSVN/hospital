@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     max-width: 100%;
-    padding: 10px 20px;
+    padding: 20px 40px;
     z-index: 1000;
 }
 
@@ -39,6 +39,7 @@
     cursor: pointer;
     color: #000;
     padding: 0 15px;
+    font-size: 1.2rem;
 
     &:hover {
         color: rgb(0, 100, 240);
@@ -78,6 +79,30 @@
         /* Change text color on hover */
     }
 }
+@media (max-width: 1366px) {
+
+    /* Laptops and large tablets */
+    .main_header {
+        padding: 10px 20px;
+    }
+
+
+    .main_header_list_name {
+        font-size: 15px;
+    }
+
+}
+
+@media (max-width: 1660px) {
+
+    .main_header {
+        padding: 15px 30px;
+    }
+    .main_header_list_name {
+        font-size: 1.1rem;
+    }
+  
+}
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
@@ -88,38 +113,12 @@
         flex-direction: column;
         align-items: stretch;
     }
-
     .logo {
         margin-bottom: 10px;
         align-self: center;
-
     }
-
     .nav {
         width: 100%;
-    }
-
-    .main_header_list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(384px, 1fr));
-        /* Create responsive grid with minimum width for items */
-        justify-content: center;
-        align-items: center;
-        max-width: 100%;
-    }
-
-    .main_header_list_name {
-        font-weight: bold;
-        cursor: pointer;
-        color: #000;
-        text-align: center;
-        /* Center text within grid items */
-        padding: 10px;
-    }
-
-    .button {
-        align-self: center;
-        max-width: 200px;
     }
 }
 

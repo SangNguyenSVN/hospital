@@ -30,8 +30,12 @@ const GridView = ({ imageUrl, title, data1 }: any) => {
                 setItemsToShow(2);
             } else if (window.innerWidth <= 1024) {
                 setItemsToShow(3);
-            } else {
+            } else if(window.innerWidth <= 1366){
                 setItemsToShow(4)
+            } else if(window.innerWidth <= 1600){
+                setItemsToShow(5)
+            }else if(window.innerWidth <= 1960){
+                setItemsToShow(6)
             }
         };
 
