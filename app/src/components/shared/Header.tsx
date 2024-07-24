@@ -3,7 +3,6 @@ import Image from 'next/image';
 import React from 'react';
 import styles from '../../styles/mainheader.module.scss';
 import Button from './Button/Button';
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 const Header = () => {
   const itemHeader = [
     {
@@ -45,16 +44,7 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        <div className={styles.activeView}>
-        <SignedOut>
-          <SignInButton>
-            <Button title={'GetStart'} />
-          </SignInButton>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-        </div>
+        <Button title={'Get Start'} />
       </div>
     </div>
   );
