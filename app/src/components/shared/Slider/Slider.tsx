@@ -4,11 +4,15 @@ import img from '../../../../../public/logo.svg'
 import styles from './Slider.module.scss'
 import Image from 'next/image'
 
-const Slider = () => {
+const Slider = ({ data1, dot }: any) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const sliderRef = useRef<HTMLUListElement>(null);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+    const handleDotClick = (index: number) => {
+        setCurrentIndex(index);
+        resetInterval();
+    };
     const resetInterval = () => {
         if (intervalRef.current) {
             clearInterval(intervalRef.current);
@@ -22,19 +26,19 @@ const Slider = () => {
         setCurrentIndex(prevIndex => (prevIndex < data.length - 1 ? prevIndex + 1 : 0));
         resetInterval();
     };
- 
+
     const prevSlide = () => {
         setCurrentIndex(prevIndex => (prevIndex > 0 ? prevIndex - 1 : data.length - 1));
         resetInterval();
     };
 
     useEffect(() => {
-        startInterval(); 
+        startInterval();
         return () => {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
-        };   
+        };
     }, []);
 
     useEffect(() => {
@@ -82,6 +86,18 @@ const Slider = () => {
             <button onClick={nextSlide} className={styles.nav_button} disabled={currentIndex === data.length - 1}>
                 &gt;
             </button>
+            {
+                dot ?
+                    <div className={styles.dot_container}>
+                        {data.map((_, index) => (
+                            <span
+                                key={index}
+                                className={`${styles.dot} ${currentIndex === index ? styles.active_dot : ''}`}
+                                onClick={() => handleDotClick(index)}
+                            />
+                        ))}
+                    </div> : <></>
+            }
         </div>
     );
 }

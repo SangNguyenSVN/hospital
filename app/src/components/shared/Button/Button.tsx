@@ -1,3 +1,4 @@
+import Link from '@/node_modules/next/link'
 import React from 'react'
 import styles from '../Button/Button.module.scss'
 const Button = ({ title }: any) => {

@@ -79,6 +79,14 @@
         /* Change text color on hover */
     }
 }
+.none {
+    text-decoration: none;
+    color: inherit; /* Change this to the desired color if you don't want to inherit the color from the parent */
+  }
+  .activeView{
+    justify-content: center;
+    align-self: center;
+  }
 @media (max-width: 1366px) {
 
     /* Laptops and large tablets */

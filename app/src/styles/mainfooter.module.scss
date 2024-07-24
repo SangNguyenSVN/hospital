@@ -41,8 +41,8 @@
     font-weight: bold;
     color: #000;
     box-sizing: border-box;
-    padding: 10px;
-    margin: 5px;
+    padding: 20px;
+    margin: 10px;
 }
 
 .main_footer_list_item {
@@ -78,16 +78,6 @@
     justify-self: center;
 }
 
-@media (max-width: 1366px) {
-    .main_footer {
-        padding: 10px 20px;
-    }
-
-    .main_footer_list {
-        width: 100%;
-    }
-}
-
 @media (max-width: 1600px) {
     .main_footer {
         padding: 15px 30px;
@@ -99,6 +89,15 @@
 
     .main_footer_list_item_name {
         font-size: 1.1em;
+    }
+}
+@media (max-width: 1366px) {
+    .main_footer {
+        padding: 10px 20px;
+    }
+
+    .main_footer_list {
+        width: 100%;
     }
 }
 
