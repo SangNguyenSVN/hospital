@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import img from '../../../../../public/logo.svg'
 import styles from './GridView.module.scss'
 import Button from '../Button/Button';

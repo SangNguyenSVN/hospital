@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import img from '../../../../../public/logo.svg'
 import styles from './Slider.module.scss'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 
 const Slider = ({ data1, dot }: any) => {
     const [currentIndex, setCurrentIndex] = useState(0);
