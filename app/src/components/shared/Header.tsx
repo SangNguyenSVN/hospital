@@ -8,22 +8,22 @@ const Header = () => {
     {
       id: 1,
       name: 'Home',
-      path: '/home',
+      path: '/page/home',
     },
     {
       id: 2,
       name: 'Doctor',
-      path: '/doctor',
+      path: '/page/doctor',
     },
     {
       id: 3,
       name: 'Appointment',
-      path: '/appointment',
+      path: '/page/appointment',
     },
     {
       id: 4,
       name: 'About',
-      path: '/about',
+      path: '/page/about',
     },
   ];
 
@@ -31,7 +31,7 @@ const Header = () => {
     <div className={styles.container} >
       <div className={styles.main_header}>
         <div className={styles.logo}>
-          <Link className={styles.none} href={'./'}>
+          <Link className={styles.none} href={'../'}>
             <Image alt="logo" width={50} height={50} src="/logo.svg" />
           </Link>
         </div>
@@ -44,7 +44,9 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        <Button title={'Get Start'} />
+        
+          <Link href={'/page/login'} >getStart</Link>
+        
       </div>
     </div>
   );

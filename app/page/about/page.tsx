@@ -1,9 +1,9 @@
 import React from 'react'
 
-const AboutScreen = () => {
+const page = () => {
   return (
     <div>AboutScreen</div>
   )
 }
 
-export default AboutScreen
+export default page

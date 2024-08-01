@@ -1,5 +1,7 @@
 import axios, { AxiosInstance as AxiosInstanceType, AxiosResponse } from "axios"
 
+
+
 // http://localhost:1337/admin
 // http://192.168.1.6:1337/api
 const BASE_URL = "http://192.168.1.6:1337/api"
@@ -10,8 +12,16 @@ const AxiosInstance: AxiosInstanceType = axios.create({
   baseURL: BASE_URL,
   headers: {
     'Authorization': `Bearer ${API_KEY}`
-  }
+  },
+ 
 })
+
+
+
+// http://localhost:1337/api/users?email=%27nguyenvusang1108@gmail.com%27
+const getAuth =({email}: any):  Promise<AxiosResponse>=> 
+AxiosInstance.get("/users?email="+email)
+
 // http://localhost:1337/api/sliders?populate=*
 const getSlider = (): Promise<AxiosResponse> =>
   AxiosInstance.get("/sliders?populate=*")
@@ -41,7 +51,10 @@ const getHospitalByCategory = (categoryName: string): Promise<AxiosResponse> =>
 const getDoctorByCategory = (categoryName: string): Promise<AxiosResponse> =>
   AxiosInstance.get('/doctors?filters[categories][Name][$in]=' + categoryName + '&populate=*')
 
+
+// post
 const createAppointment = (data: any) => AxiosInstance.post('/appointments', data)
+
 
   export default {
     getSlider,
@@ -56,5 +69,7 @@ const createAppointment = (data: any) => AxiosInstance.post('/appointments', dat
 
     createAppointment,
     
-    getAppointment
+    getAppointment,
+
+    getAuth
   }
