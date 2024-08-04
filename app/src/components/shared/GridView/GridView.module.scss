@@ -5,14 +5,15 @@
 }
 
 .item_box {
+    max-width: 100%;
     position: static;
     display: grid;
-    max-width: 100%;
     padding: 20px;
     justify-content: space-between;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     justify-items: center;
     gap: 20px;
+
 }
 
 .list {

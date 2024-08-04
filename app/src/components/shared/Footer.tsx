@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React from 'react';
 import styles from '../../styles/mainfooter.module.scss';
 
@@ -37,7 +37,15 @@ const Footer = () => {
     <div className={styles.contaner}>
       <div className={styles.main_footer}>
         <div className={styles.logo}>
-          <Image alt="logo" width={50} height={50} src="/logo.svg" />
+          <Image
+            alt="logo"
+            width={50}
+            height={50}
+            src="/logo.svg"
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </div>
         <div className={styles.left_content}>text</div>
         <div className={styles.nav}>
@@ -60,7 +68,7 @@ const Footer = () => {
         </div>
       </div >
     </div >
-  )
+  );
 }
 
 export default Footer

@@ -1,8 +1,8 @@
 import Link from '@/node_modules/next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React from 'react';
 import styles from '../../styles/mainheader.module.scss';
-import Button from './Button/Button';
+import { Button } from '@/components/ui/button';
 const Header = () => {
   const itemHeader = [
     {
@@ -32,7 +32,15 @@ const Header = () => {
       <div className={styles.main_header}>
         <div className={styles.logo}>
           <Link className={styles.none} href={'../'}>
-            <Image alt="logo" width={50} height={50} src="/logo.svg" />
+            <Image
+              alt="logo"
+              width={50}
+              height={50}
+              src="/logo.svg"
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </Link>
         </div>
         <div className={styles.nav}>
@@ -44,9 +52,9 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        
-          <Link href={'/page/login'} >getStart</Link>
-        
+        <Link className={styles.button} href={'/page/login'} >
+          <p className={styles.button_text}>Get Start</p>
+        </Link>
       </div>
     </div>
   );

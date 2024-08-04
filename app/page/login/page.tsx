@@ -12,43 +12,47 @@ const login = () => {
 
 
   const handleLogin = async () => {
-    try {
-      const response = await auth.loginWithAuth({ identifier, password });
-      console.log("Login Successful", response.data);
-      alert("Login Successful");
-      redirect('../');
-    } catch (error: any) {
-      alert("Login Failed")
-      console.log(error)
-      
-    } 
+    // try {
+    //   const response = await auth.loginWithAuth({ identifier, password });
+    //   console.log("Login Successful", response.data);
+    //   alert("Login Successful");
+    //   redirect('../');
+    // } catch (error: any) {
+    //   alert("Login Failed")
+    //   console.log(error)
+
+    // } 
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-         
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleLogin}>
+        <h1>Login</h1>
+        <div className={styles.container_item}>
           <input
+            className={styles.txt_input}
+            placeholder="Email"
             type="text"
             id="identifier"
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
           />
         </div>
-        <div>
-
+        <div className={styles.container_item}>
           <input
+            className={styles.txt_input}
+            placeholder="Password"
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <Button className={styles.button}>
-          <p className={styles.button_text}>Login</p>
-        </Button>
+        <div className={styles.container_item}>
+          <Button className={styles.button}>
+            <p className={styles.button_text}>Login</p>
+          </Button>
+        </div>
       </form>
     </div>
   )

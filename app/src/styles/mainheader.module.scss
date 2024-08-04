@@ -1,5 +1,6 @@
 .container {
-    position: static;
+    position: sticky;
+    background-color: #fff;
     backdrop-filter: blur(10px);
     max-width: 100%;
 }
@@ -54,9 +55,10 @@
     background-color: blue;
     border: none;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 0px 20px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    text-decoration: none;
 
     &:hover {
         background-color: rgb(0, 104, 250);
@@ -67,11 +69,10 @@
 .button_text {
     font-weight: bold;
     color: #fff;
-    /* Default text color */
     font-size: 16px;
     text-align: center;
-    /* Center the text inside */
     transition: color 0.3s;
+    text-decoration: none;
     /* Smooth color transition */
 
     &:hover {
@@ -79,14 +80,13 @@
         /* Change text color on hover */
     }
 }
+
 .none {
     text-decoration: none;
-    color: inherit; /* Change this to the desired color if you don't want to inherit the color from the parent */
-  }
-  .activeView{
-    justify-content: center;
-    align-self: center;
-  }
+    color: inherit;
+    /* Change this to the desired color if you don't want to inherit the color from the parent */
+}
+
 @media (max-width: 1366px) {
 
     /* Laptops and large tablets */
@@ -106,25 +106,26 @@
     .main_header {
         padding: 15px 30px;
     }
+
     .main_header_list_name {
         font-size: 1.1rem;
     }
-  
+
 }
 
-/* Responsive Styles */
 @media (max-width: 1024px) {
 
-    /* Small tablets and below */
     .main_header {
         padding: 10px;
         flex-direction: column;
         align-items: stretch;
     }
+
     .logo {
         margin-bottom: 10px;
         align-self: center;
     }
+
     .nav {
         width: 100%;
     }
@@ -132,7 +133,6 @@
 
 @media (max-width: 768px) {
 
-    /* Smartphones */
     .main_header {
         padding: 10px;
         flex-direction: column;
@@ -157,16 +157,13 @@
     .main_header_list_name {
         padding: 10px 0;
         font-size: 14px;
-        /* Adjust font size for better readability on smaller screens */
     }
 }
 
 @media (max-width: 480px) {
 
-    /* Extra small smartphones */
     .main_header_list_name {
         font-size: 12px;
-        /* Further reduce font size for very small screens */
         padding: 8px 0;
     }
 }

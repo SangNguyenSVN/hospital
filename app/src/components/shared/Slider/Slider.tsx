@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import img from '../../../../../public/logo.svg'
 import styles from './Slider.module.scss'
-import Image from "next/legacy/image"
+import Image from "next/image"
 
 const Slider = ({ data1, dot }: any) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -72,11 +72,7 @@ const Slider = ({ data1, dot }: any) => {
                         <li key={item.id} className={styles.slide}>
                             <div className={styles.container_item_card}>
                                 <div className={styles.view_img}>
-                                    <Image
-                                        src={item.imageUrl}
-                                        alt={item.title}
-                                        layout="fill"
-                                    />
+                                    <Image src={item.imageUrl} alt={item.title} fill sizes="100vw" />
                                 </div>
                             </div>
                         </li>

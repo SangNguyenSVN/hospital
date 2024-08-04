@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
-import Image from "next/legacy/image"
+import Image from "next/image"
 import img from '../../../../../public/logo.svg'
 import styles from './GridView.module.scss'
 import Button from '../Button/Button';
@@ -99,7 +99,10 @@ const GridView = ({ imageUrl, title, data1 }: any) => {
                                     <Image
                                         src={item.imageUrl}
                                         alt={item.title}
-                                    />
+                                        style={{
+                                            maxWidth: "100%",
+                                            height: "auto"
+                                        }} />
                                 </div>
                                 <div className={styles.view_txt}>
                                     <div className="">{item.title}</div>
@@ -112,14 +115,24 @@ const GridView = ({ imageUrl, title, data1 }: any) => {
             <div className={styles.button_container}>
                 <button onClick={onClick} className={styles.btn}>
                     {active
-                        ? <div className={styles.title_button}><Image src={angle_up} alt="Show less" /></div>
-                        : <div className={styles.title_button}><Image src={angle_down} alt="Show more" /></div>}
+                        ? <div className={styles.title_button}><Image
+                        src={angle_up}
+                        alt="Show less"
+                        style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                        }} /></div>
+                        : <div className={styles.title_button}><Image
+                        src={angle_down}
+                        alt="Show more"
+                        style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                        }} /></div>}
                 </button>
             </div>
         </div>
-
-
-    )
+    );
 }
 
 export default GridView
