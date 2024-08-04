@@ -38,9 +38,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: auto;
     opacity: 1;
-    /* Initially hidden */
     transform: translateY(20px);
-    /* Slightly offset to create a sliding effect */
     transition: opacity 0.5s ease, transform 0.5s ease;
 
 
@@ -50,10 +48,7 @@
 
     &.hidden {
         opacity: 0;
-        /* Fully hidden */
         transform: translateY(20px);
-        /* Maintain sliding effect */
-
     }
 
     &.show {

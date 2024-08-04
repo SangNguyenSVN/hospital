@@ -49,13 +49,14 @@
 }
 
 .button {
+    align-self: center;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: blue;
     border: none;
     border-radius: 20px;
-    padding: 0px 20px;
+    padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     text-decoration: none;
@@ -67,29 +68,27 @@
 }
 
 .button_text {
+    display: contents;
     font-weight: bold;
     color: #fff;
     font-size: 16px;
     text-align: center;
     transition: color 0.3s;
     text-decoration: none;
-    /* Smooth color transition */
 
     &:hover {
         color: #fff;
-        /* Change text color on hover */
+      
     }
 }
 
 .none {
     text-decoration: none;
     color: inherit;
-    /* Change this to the desired color if you don't want to inherit the color from the parent */
 }
 
 @media (max-width: 1366px) {
 
-    /* Laptops and large tablets */
     .main_header {
         padding: 10px 20px;
     }
@@ -125,10 +124,12 @@
         margin-bottom: 10px;
         align-self: center;
     }
-
-    .nav {
-        width: 100%;
+    .button{
+        position: absolute;
+        top: 10px;
+        right: 10px;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -144,9 +145,7 @@
         align-self: center;
     }
 
-    .nav {
-        width: 100%;
-    }
+   
 
     .main_header_list {
         flex-direction: column;
