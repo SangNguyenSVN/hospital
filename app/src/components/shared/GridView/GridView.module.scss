@@ -5,29 +5,27 @@
 }
 
 .item_box {
+    padding: 10px;
     max-width: 100%;
     position: static;
     display: grid;
-    padding: 20px;
     justify-content: space-between;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     justify-items: center;
-    gap: 20px;
+    gap: 100px;
 
 }
 
 .list {
     list-style-type: none;
-    padding: 0;
-    margin: 0;
     display: contents;
 }
 
 .container_item_card {
     cursor: pointer;
     display: flex;
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     align-items: center;
     justify-content: center;
     align-self: center;

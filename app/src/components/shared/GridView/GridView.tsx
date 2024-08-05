@@ -25,17 +25,15 @@ const GridView = ({ imageUrl, title, data1 }: any) => {
     useEffect(() => {
         const updateItemsToShow = () => {
             if (window.innerWidth <= 480) {
+                setItemsToShow(1);
+            } else if (window.innerWidth <= 1010) {
                 setItemsToShow(2);
-            } else if (window.innerWidth <= 864) {
-                setItemsToShow(2);
-            } else if (window.innerWidth <= 1120) {
-                setItemsToShow(3);
-            } else if(window.innerWidth <= 1400){
+            } else if (window.innerWidth <= 1360) {
+                setItemsToShow(3)
+            }else if (window.innerWidth <= 1680) {
                 setItemsToShow(4)
-            } else if(window.innerWidth <= 1600){
+            } else if (window.innerWidth <= 1960) {
                 setItemsToShow(5)
-            }else if(window.innerWidth <= 1960){
-                setItemsToShow(6)
             }
         };
 
@@ -92,8 +90,8 @@ const GridView = ({ imageUrl, title, data1 }: any) => {
                                 key={item.id}
                                 className=
                                 {`${styles.container_item_card} 
-                                ${index < itemsToShow  ? styles.container_item_card : styles.hidden}
-                                ${!active ? '': styles.show}`}
+                                ${index < itemsToShow ? styles.container_item_card : styles.hidden}
+                                ${!active ? '' : styles.show}`}
                             >
                                 <div className={styles.view_img}>
                                     <Image
@@ -116,19 +114,19 @@ const GridView = ({ imageUrl, title, data1 }: any) => {
                 <button onClick={onClick} className={styles.btn}>
                     {active
                         ? <div className={styles.title_button}><Image
-                        src={angle_up}
-                        alt="Show less"
-                        style={{
-                            maxWidth: "100%",
-                            height: "auto"
-                        }} /></div>
+                            src={angle_up}
+                            alt="Show less"
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                            }} /></div>
                         : <div className={styles.title_button}><Image
-                        src={angle_down}
-                        alt="Show more"
-                        style={{
-                            maxWidth: "100%",
-                            height: "auto"
-                        }} /></div>}
+                            src={angle_down}
+                            alt="Show more"
+                            style={{
+                                maxWidth: "100%",
+                                height: "auto"
+                            }} /></div>}
                 </button>
             </div>
         </div>

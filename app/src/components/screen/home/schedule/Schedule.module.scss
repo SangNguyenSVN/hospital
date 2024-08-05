@@ -1,0 +1,129 @@
+@import "../../../../libary/libary.module.scss";
+
+.container {
+    flex: 1;
+    padding: 10px;
+}
+
+.schedule_inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.item {
+    color: $text-color;
+    display: inline-block;
+    position: relative;
+    background-color: $bg_blue_color;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 250px;
+    transition: transform 0.5s ease;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        transform: translateY(-10px);
+        z-index: 9;
+    }
+
+    @media (max-width: 1024px) {
+        flex-direction: column;
+        height: auto;
+        width: auto;
+    }
+}
+
+.item_inner {
+    margin: 10px;
+}
+
+.header {
+    font-weight: bold;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.title {
+    font-size: 16px;
+    padding: 5px;
+}
+
+.href {
+    justify-content: flex-end;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: $text-color;
+    display: inline-block;
+    transition: color 0.3s ease;
+
+    .show {
+        position: relative;
+
+        &::before {
+            content: "Show More";
+            display: inline-block;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background-color: $text-color;
+            transition: width 0.3s ease;
+        }
+    }
+
+    &:hover .show::after {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .schedule_inner {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .item {
+        position: relative;
+        height: auto;
+    }
+
+    .container :nth-child(odd):last-child {
+        grid-column: span 2;
+    }
+
+    .href {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+        height: 100%;
+
+        .show {
+
+            &::before {
+                display: none;
+            }
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
