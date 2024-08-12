@@ -1,64 +1,66 @@
-"use client";
-import React from 'react'
-import { useState, useEffect } from 'react';
+"use client"
+import React, { useState } from 'react'
+import styles from './register.module.scss'
 import auth from '@/app/src/services/auth';
+import { Button } from '@/components/ui/button';
 
-const register = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+const page = () => {
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     try {
       const response = await auth.registerWithAuth({ username, email, password });
-      // Handle successful registration
-      console.log("Registration Successful", response.data);
-    } catch (error: any) {
-      // Handle registration error
-      setError(error.response?.data?.message || "An error occurred");
-    } finally {
-      setLoading(false);
+      console.log('Registration successful:', response.data);
+      // Redirect to login or home page
+      
+    } catch (error) {
+      console.error('Registration error:', error);
     }
   };
   return (
-    <form onSubmit={handleRegister}>
-      <div>
-        <label>Username</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit" disabled={loading}>
-        {loading ? "Registering..." : "Register"}
-      </button>
-    </form>
+    <div className={styles.container}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h1>Register</h1>
+        <div className={styles.container_item}>
+          <input
+            className={styles.txt_input}
+            placeholder="Username"
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className={styles.container_item}>
+          <input
+            className={styles.txt_input}
+            placeholder="Email"
+            type="text"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className={styles.container_item}>
+          <input
+            className={styles.txt_input}
+            placeholder="Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className={styles.container_item}>
+          <Button type='submit' className={styles.button}>
+            <p className={styles.button_text}>Register</p>
+          </Button>
+        </div>
+      </form>
+    </div>
   )
 }
 
-export default register
+export default page

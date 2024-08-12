@@ -1,9 +1,17 @@
+"use client"
 import Link from '@/node_modules/next/link';
 import Image from "next/image";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../../styles/mainheader.module.scss';
-import { Button } from '@/components/ui/button';
+import Global_API from '../../Server/Global_API';
+
 const Header = () => {
+  const [data, setDta] = useState()
+
+  useEffect(()=>{
+    
+  },[])
+
   const itemHeader = [
     {
       id: 1,
@@ -52,11 +60,13 @@ const Header = () => {
             ))}
           </ul>
         </div>
-        <Link className={styles.button} href={'/page/login'} >
+
+        <Link className={styles.button} href="/page/login">
           <p className={styles.button_text}>Get Start</p>
         </Link>
       </div>
     </div>
+
   );
 };
 

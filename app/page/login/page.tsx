@@ -1,32 +1,33 @@
 "use client";
 import React from 'react'
 import { useState } from 'react';
-import { redirect } from 'next/navigation'
-import auth from '@/app/src/services/auth';
 import { Button } from '@/components/ui/button';
+
+import auth from '@/app/src/services/auth';
 import styles from './login.module.scss'
+import Link from '@/node_modules/next/link';
 const login = () => {
 
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
+  const [identifier, setIdentifier] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
 
-  const handleLogin = async () => {
-    // try {
-    //   const response = await auth.loginWithAuth({ identifier, password });
-    //   console.log("Login Successful", response.data);
-    //   alert("Login Successful");
-    //   redirect('../');
-    // } catch (error: any) {
-    //   alert("Login Failed")
-    //   console.log(error)
-
-    // } 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const response = await auth.loginWithAuth({ identifier, password });
+      console.log('Login successful:', response.data);
+      const {jwt} = response.data;
+      localStorage.setItem('token', jwt);
+      return response;
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   };
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleLogin}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h1>Login</h1>
         <div className={styles.container_item}>
           <input
@@ -49,9 +50,12 @@ const login = () => {
           />
         </div>
         <div className={styles.container_item}>
-          <Button className={styles.button}>
+          <Button type='submit' className={styles.button}>
             <p className={styles.button_text}>Login</p>
           </Button>
+        </div>
+        <div className={styles.container_item}>
+          <Link href={"/page/register"}>Register</Link>
         </div>
       </form>
     </div>

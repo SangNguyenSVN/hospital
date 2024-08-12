@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Footer from "./src/components/shared/Footer";
 import Header from "./src/components/shared/Header";
-import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,17 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Theme>
-          {/* <header>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header> */}
+   
+      <html lang="en">
+        <body className={inter.className}>
           <header>
             <Header />
           </header>
@@ -35,8 +27,8 @@ export default function RootLayout({
           <div>
             <Footer />
           </div>
-        </Theme>
-      </body>
-    </html>
+        </body>
+      </html>
+
   );
 }

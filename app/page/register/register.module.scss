@@ -1,0 +1,65 @@
+.container {
+    flex: 1;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+
+
+}
+
+.form {
+    padding:10rem 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #ccc; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; /* Adds rounded corners to the form */
+}
+
+.container_item {
+    padding: 10px;
+}
+
+.txt_input {
+    justify-self: center;
+    font-size: 20px;
+    padding: 10px 30px;
+    border-radius: 10px;
+}
+
+.button {
+    width: 100%;
+    justify-content: center;
+    background-color: blue;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+    &:hover {
+        background-color: rgb(0, 104, 250);
+       
+    }
+}
+
+.button_text {
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    transition: color 0.3s, transform 0.2s;
+    &:hover {
+        color: #fff;
+        transform: scale(1.1);
+        /* Change text color on hover */
+    }
+}
+
+.none {
+    text-decoration: none;
+    color: inherit;
+    /* Change this to the desired color if you don't want to inherit the color from the parent */
+}
