@@ -3,7 +3,6 @@ import React from 'react'
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
-import auth from '@/app/src/services/auth';
 import styles from './login.module.scss'
 import Link from '@/node_modules/next/link';
 const login = () => {
@@ -13,16 +12,7 @@ const login = () => {
 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      const response = await auth.loginWithAuth({ identifier, password });
-      console.log('Login successful:', response.data);
-      const {jwt} = response.data;
-      localStorage.setItem('token', jwt);
-      return response;
-    } catch (error) {
-      console.error('Login error:', error);
-    }
+
   };
 
   return (

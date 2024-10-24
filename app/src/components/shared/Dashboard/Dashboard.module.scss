@@ -1,0 +1,35 @@
+/* src/components/dashboard/Dashboard.module.css */
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #2d2d2d;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px ;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f4f4f4;
+}

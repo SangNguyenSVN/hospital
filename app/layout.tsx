@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Footer from "./src/components/shared/Footer";
-import Header from "./src/components/shared/Header";
 import '@radix-ui/themes/styles.css';
+import Dashboard from "./src/components/shared/Dashboard/Dashboard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,19 +15,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-   
-      <html lang="en">
-        <body className={inter.className}>
-          <header>
-            <Header />
-          </header>
-          {children}
-          <div>
-            <Footer />
-          </div>
-        </body>
-      </html>
+  const isAdmin = true; // Điều kiện thực tế của bạn để kiểm tra nếu là admin
 
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        {isAdmin ? (
+          <Dashboard>{children}</Dashboard> // Sử dụng Dashboard và truyền children vào
+        ) : (
+          children // Nội dung mặc định khi không phải là admin
+        )}
+      </body>
+    </html>
   );
 }
