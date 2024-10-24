@@ -1,8 +1,9 @@
+import DoctorScreen from '@/app/src/admin/screens/DoctorScreen'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>AboutScreen</div>
+    <DoctorScreen />
   )
 }
 
