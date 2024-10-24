@@ -1,0 +1,29 @@
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: #f4f4f4; // Màu nền cho Dashboard
+    min-height: 100vh; // Chiều cao tối thiểu bằng chiều cao viewport
+  }
+  
+  .header {
+    background-color: #2d2d2d; // Màu nền cho header
+    color: white; // Màu chữ cho header
+    padding: 15px;
+    text-align: center; // Canh giữa nội dung trong header
+  }
+  
+  .content {
+    flex-grow: 1; // Để nội dung chiếm toàn bộ chiều cao còn lại
+    padding: 20px;
+    background-color: white; // Màu nền cho nội dung
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Đổ bóng cho nội dung
+  }
+  
+  .footer {
+    text-align: center; // Canh giữa nội dung trong footer
+    padding: 10px;
+    background-color: #2d2d2d; // Màu nền cho footer
+    color: white; // Màu chữ cho footer
+  }
+  

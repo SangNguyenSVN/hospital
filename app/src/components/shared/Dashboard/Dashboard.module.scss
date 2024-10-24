@@ -1,35 +1,59 @@
 /* src/components/dashboard/Dashboard.module.css */
 .dashboardContainer {
   display: flex;
-  min-height: 100vh;
+  min-height: 100vh;  /* Đảm bảo chiều cao tối thiểu là 100% chiều cao viewport */
+  max-width: 100%;
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
 }
 
 .sidebar {
-  width: 250px;
-  background-color: #2d2d2d;
+  width: 250px; /* Chiều rộng của sidebar */
+  background-color: #2d2d2d; /* Màu nền của sidebar */
   padding: 20px;
+  color: white; /* Màu chữ mặc định */
 }
 
 .sidebar ul {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: none; /* Bỏ dấu đầu dòng */
+  padding: 0; /* Bỏ padding */
 }
 
 .sidebar li {
-  margin: 15px ;
+  margin: 15px 0; /* Khoảng cách giữa các item */
 }
 
 .sidebar a {
-  color: white;
-  text-decoration: none;
+  color: white; /* Màu chữ liên kết */
+  text-decoration: none; /* Bỏ gạch chân */
+  display: block; /* Để toàn bộ khu vực của item clickable */
+  padding: 10px; /* Padding cho item */
+  border-radius: 4px; /* Bo tròn các góc */
 }
 
 .sidebar a:hover {
-  text-decoration: underline;
+  text-decoration: underline; /* Gạch chân khi hover */
+  background-color: rgba(255, 255, 255, 0.1); /* Thêm hiệu ứng nền khi hover */
+}
+
+.mainItems {
+  margin-bottom: 20px; /* Khoảng cách giữa nhóm chính và nhóm phụ */
+}
+
+.secondaryItems {
+  margin-top: 20px; /* Khoảng cách giữa nhóm phụ và phần nội dung khác */
+}
+
+.divider {
+  border: none; /* Không có viền */
+  border-top: 1px solid #dee2e6; /* Đường phân cách */
+  margin: 15px 0; /* Margin cho đường phân cách */
 }
 
 .content {
-  flex-grow: 1;
-  padding: 20px;
-  background-color: #f4f4f4;
+  flex-grow: 1; /* Nội dung chiếm toàn bộ chiều rộng còn lại */
+  padding: 20px; /* Khoảng cách cho nội dung */
+  background-color: #ffffff; /* Màu nền cho nội dung */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Thêm bóng cho nội dung */
 }

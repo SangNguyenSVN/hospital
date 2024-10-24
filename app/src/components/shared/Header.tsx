@@ -3,7 +3,6 @@ import Link from '@/node_modules/next/link';
 import Image from "next/image";
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/mainheader.module.scss';
-import Global_API from '../../Server/Global_API';
 
 const Header = () => {
   const [data, setDta] = useState()
