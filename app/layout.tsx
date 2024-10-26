@@ -1,5 +1,4 @@
-// src/app/layout.tsx
-"use client"; // Đánh dấu file này là client component
+"use client"; 
 
 import { Inter } from "next/font/google";
 import '@radix-ui/themes/styles.css';
@@ -16,11 +15,16 @@ export default function RootLayout({
   const router = useRouter();
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const user = localStorage.getItem("token");
+    console.log("Token:", user); // Kiểm tra token
     if (!user) {
-      router.push('/admin/login'); // Chuyển hướng đến trang đăng nhập nếu không có user
+      router.replace('/admin/login');
+    }else{
+      router.replace('/admin/dashboard');
+
     }
   }, [router]);
+  
 
   return (
     <html lang="en">

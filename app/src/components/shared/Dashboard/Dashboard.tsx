@@ -1,6 +1,8 @@
 // src/components/dashboard/Dashboard.tsx
 import React from "react";
 import styles from "./Dashboard.module.scss";
+import { useRouter } from 'next/navigation'; // Import useRouter từ next/navigation
+import authService from "@/app/src/services/authService"; // Đường dẫn tới dịch vụ xác thực
 
 const itemDashboard = [
   { id: 1, name: 'Overview', path: '/admin/dashboard/overview' },
@@ -11,10 +13,16 @@ const itemDashboard = [
   { id: 6, name: 'Medicine', path: '/admin/dashboard/medicine' },
   { id: 7, name: 'Hospital', path: '/admin/dashboard/hospital' },
   { id: 8, name: 'Settings', path: '/admin/dashboard/settings' },
-  { id: 9, name: 'Logout', path: '/logout' },
 ];
 
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter(); // Khởi tạo router
+
+  const handleLogout = async () => {
+    await authService.logout(); // Gọi hàm đăng xuất từ authService
+    router.push('/admin/login'); // Chuyển hướng đến trang đăng nhập
+  };
+
   return (
     <div className={styles.dashboardContainer}>
       <nav className={styles.sidebar}>
@@ -36,6 +44,9 @@ const Dashboard = ({ children }: { children: React.ReactNode }) => {
               </li>
             ))}
           </div>
+          <li>
+            <button className={styles.logoutButton} onClick={handleLogout}>Logout</button> {/* Nút đăng xuất */}
+          </li>
         </ul>
       </nav>
       <div className={styles.content}>

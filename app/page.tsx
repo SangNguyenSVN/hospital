@@ -1,10 +1,9 @@
 import ScrollUp from "./src/components/shared/ScollUp/ScrollUp";
 
-export default function Home() {
+export default function page() {
   return (
     <div>
-      
-      <ScrollUp show/>
+      <ScrollUp show={true}/>
     </div>
   );
 }
