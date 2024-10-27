@@ -21,7 +21,9 @@ const login = () => {
       console.log(response)
       if (response && response.token) {
         localStorage.setItem('token', response.token);
-        router.push('/admin/dashboard');
+        localStorage.setItem('user', response.user);
+
+        router.replace('/admin/dashboard');
       } else {
         setError('Login failed: Invalid credentials.');
       }

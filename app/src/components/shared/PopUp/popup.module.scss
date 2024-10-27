@@ -1,0 +1,56 @@
+/* styles/popup.module.scss */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo popup nằm trên các thành phần khác */
+}
+
+.popup {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    text-align: center;
+}
+
+.actions {
+    margin-top: 20px; /* Thêm khoảng cách trên các nút */
+    display: flex;
+    justify-content: space-between; /* Để các nút nằm cách nhau */
+}
+
+.confirmButton, .cancelButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s; /* Thêm hiệu ứng chuyển động */
+    flex: 1; /* Chiếm đều không gian */
+    margin: 0 5px; /* Khoảng cách giữa các nút */
+}
+
+.confirmButton {
+    background: #0070f3;
+    color: white;
+}
+
+.cancelButton {
+    background: #f44336; /* Màu đỏ cho nút Cancel */
+    color: white;
+}
+
+.confirmButton:hover {
+    background: #005bb5;
+}
+
+.cancelButton:hover {
+    background: #d32f2f; /* Màu đỏ đậm hơn khi hover */
+}

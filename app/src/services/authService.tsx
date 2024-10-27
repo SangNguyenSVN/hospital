@@ -84,8 +84,7 @@ const updateAccount = async (password?: string, userType?: string): Promise<{ me
 // Đăng xuất
 const logout = async () => {
     try {
-        await apiClient.post('/auth/logout', {});
-        localStorage.removeItem('token'); // hoặc sessionStorage.removeItem('token');
+        await apiClient.post('/auth/logout');
     } catch (error) {
         console.error('Lỗi đăng xuất:', error);
         throw error;

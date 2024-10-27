@@ -15,14 +15,10 @@ export default function RootLayout({
   const router = useRouter();
 
   useEffect(() => {
-    const user = localStorage.getItem("token");
-    console.log("Token:", user); // Kiểm tra token
+    const user = localStorage.getItem("user");
     if (!user) {
       router.replace('/admin/login');
-    }else{
-      router.replace('/admin/dashboard');
-
-    }
+    } 
   }, [router]);
   
 

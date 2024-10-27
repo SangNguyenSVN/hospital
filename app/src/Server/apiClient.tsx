@@ -1,8 +1,7 @@
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Địa chỉ API của bạn
-const API_URL = 'http://192.168.1.5:3001/api/';
+const API_URL = 'https://server-cookies-break.vercel.app/api/';
 
 // Tạo một instance của axios với baseURL
 const apiClient = axios.create({
@@ -12,7 +11,7 @@ const apiClient = axios.create({
 
 // Middleware để thêm token vào header trước khi gửi request
 apiClient.interceptors.request.use(async (config) => {
-    const token = await AsyncStorage.getItem('token'); // Lấy token từ AsyncStorage
+    const token = localStorage.getItem('token'); // Lấy token từ localStorage
     if (token) {
         config.headers.Authorization = `Bearer ${token}`; // Thêm token vào header
     }

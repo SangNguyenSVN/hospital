@@ -5,22 +5,21 @@ import { useRouter } from 'next/navigation'; // Import useRouter từ next/navig
 import authService from "@/app/src/services/authService"; // Đường dẫn tới dịch vụ xác thực
 
 const itemDashboard = [
-  { id: 1, name: 'Overview', path: '/admin/dashboard/overview' },
-  { id: 2, name: 'Doctor', path: '/admin/dashboard/doctor' },
-  { id: 3, name: 'Patient', path: '/admin/dashboard/patient' },
-  { id: 4, name: 'Appointment', path: '/admin/dashboard/appointment' },
-  { id: 5, name: 'Status', path: '/admin/dashboard/status' },
-  { id: 6, name: 'Medicine', path: '/admin/dashboard/medicine' },
-  { id: 7, name: 'Hospital', path: '/admin/dashboard/hospital' },
-  { id: 8, name: 'Settings', path: '/admin/dashboard/settings' },
+  { id: 1, name: 'Doctor', path: '/admin/dashboard/doctor' },
+  { id: 2, name: 'Patient', path: '/admin/dashboard/patient' },
+  { id: 3, name: 'Appointment', path: '/admin/dashboard/appointment' },
+  { id: 4, name: 'Status', path: '/admin/dashboard/status' },
+  { id: 5, name: 'Medicine', path: '/admin/dashboard/medicine' },
+  { id: 6, name: 'Hospital', path: '/admin/dashboard/hospital' },
 ];
 
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter(); // Khởi tạo router
 
   const handleLogout = async () => {
-    await authService.logout(); // Gọi hàm đăng xuất từ authService
-    router.push('/admin/login'); // Chuyển hướng đến trang đăng nhập
+    await authService.logout(); 
+    localStorage.clear(); // Hoặc sessionStorage.clear();
+    router.replace('/admin/login'); 
   };
 
   return (
