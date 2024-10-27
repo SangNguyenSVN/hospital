@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react'
 import styles from './register.module.scss'
-import auth from '@/app/src/services/auth';
 import { Button } from '@/components/ui/button';
 
 const page = () => {
@@ -10,14 +9,7 @@ const page = () => {
   const [password, setPassword] = useState<string>('');
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    try {
-      const response = await auth.registerWithAuth({ username, email, password });
-      console.log('Registration successful:', response.data);
-      // Redirect to login or home page
-      
-    } catch (error) {
-      console.error('Registration error:', error);
-    }
+    
   };
   return (
     <div className={styles.container}>
