@@ -83,7 +83,7 @@ const AppointmentScreen: React.FC = () => {
 
   // Navigate to the update screen with the selected appointment ID
   const handleUpdateClick = (appointment: Appointment) => {
-    
+
   };
 
   const handleAddAppointmentClick = () => {
@@ -114,7 +114,7 @@ const AppointmentScreen: React.FC = () => {
               <td className={styles.td}>{index + 1}</td>
               <td className={styles.td}>{appointment.fullname}</td>
               <td className={styles.td}>{appointment.date}</td>
-              <td className={styles.td}>{appointment.phoneNumber}</td> {/* Thay đổi để hiển thị số điện thoại */}
+              <td className={styles.td}>{appointment.phoneNumber}</td>
               <td className={styles.td}>
                 <button
                   onClick={() => openPopup(appointment._id)}
@@ -132,6 +132,7 @@ const AppointmentScreen: React.FC = () => {
             </tr>
           ))}
         </tbody>
+
 
       </table>
       <button
