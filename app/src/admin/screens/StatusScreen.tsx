@@ -1,25 +1,26 @@
-"use client"; // Đảm bảo rằng bạn đang sử dụng client component trong Next.js
+"use client";
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import apiService from '../../services/apiService';
-import styles from '../styles/status.module.scss'; // Giả sử bạn đã tạo file CSS module
-import Popup from '../../components/shared/PopUp/PopUp'; // Import component Popup
+import styles from '../styles/status.module.scss';
+import Popup from '../../components/shared/PopUp/PopUp';
 
-// Định nghĩa kiểu cho Status
 interface Status {
-    _id: string; // Giả sử _id là định danh từ MongoDB
+    _id: string;
     name: string;
 }
 
 const StatusScreen: React.FC = () => {
-    const [statuses, setStatuses] = useState<Status[]>([]); // Trạng thái lưu danh sách trạng thái
-    const [loading, setLoading] = useState<boolean>(true); // Trạng thái loading
-    const [error, setError] = useState<string | null>(null); // Trạng thái lỗi
-    const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false); // Trạng thái mở popup
-    const [selectedStatusId, setSelectedStatusId] = useState<string | null>(null); // ID của trạng thái đã chọn để xóa
+    const [statuses, setStatuses] = useState<Status[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+    const [selectedStatusId, setSelectedStatusId] = useState<string | null>(null);
 
-    // Lấy danh sách trạng thái từ API
+    const router = useRouter();
+
     const getStatuses = async () => {
-        setLoading(true); // Bắt đầu loading
+        setLoading(true);
         try {
             const response = await apiService.getStatuses();
             setStatuses(response.data);
@@ -28,47 +29,49 @@ const StatusScreen: React.FC = () => {
             console.error('Error fetching statuses:', error);
             setError('Failed to fetch statuses');
         } finally {
-            setLoading(false); // Kết thúc loading
+            setLoading(false);
         }
     };
 
-    // Lấy danh sách trạng thái khi component được render
     useEffect(() => {
         getStatuses();
     }, []);
 
-    // Hàm xử lý xác nhận xóa trạng thái
     const handleConfirmDelete = async () => {
         if (selectedStatusId) {
             try {
                 await apiService.deleteStatus(selectedStatusId);
                 console.log("Deleted:", selectedStatusId);
-                getStatuses(); // Làm mới danh sách trạng thái sau khi xóa
+                getStatuses();
             } catch (error) {
                 console.error('Error deleting status:', error);
                 setError('Failed to delete status');
             } finally {
-                setIsPopupOpen(false); // Đóng popup sau khi thực hiện xóa
-                setSelectedStatusId(null); // Reset ID đã chọn
+                setIsPopupOpen(false);
+                setSelectedStatusId(null);
             }
         }
     };
 
-    // Hàm mở popup xác nhận
     const openPopup = (id: string) => {
         setSelectedStatusId(id);
         setIsPopupOpen(true);
     };
 
+    // Navigate to the update screen with the selected status ID
+    const handleUpdateClick = (status: any) => {
+        router.push(`/admin/dashboard/status/update?id=${status._id}&name=${encodeURIComponent(status.name)}`);
+    };
+    const handleAddStatusClick = () => {
+        router.push(`/admin/dashboard/status/post`);
+    };
     return (
         <div>
             <h1>Status Management</h1>
 
-            {/* Hiển thị trạng thái loading */}
             {loading && <p>Loading statuses...</p>}
-            {error && <p className={styles.error}>{error}</p>} {/* Hiển thị lỗi nếu có */}
+            {error && <p className={styles.error}>{error}</p>}
 
-            {/* Tiêu đề cho danh sách trạng thái */}
             <h2>Current Statuses:</h2>
             <table className={styles.table}>
                 <thead>
@@ -84,24 +87,34 @@ const StatusScreen: React.FC = () => {
                             <td className={styles.td}>{index + 1}</td>
                             <td className={styles.td}>{status.name}</td>
                             <td className={styles.td}>
-                                <button 
-                                    onClick={() => openPopup(status._id)} 
+                                <button
+                                    onClick={() => openPopup(status._id)}
                                     className={styles.deleteButton}
                                 >
                                     Delete
+                                </button>
+                                <button
+                                    onClick={() => handleUpdateClick(status)}
+                                    className={styles.updateButton}
+                                >
+                                    Update
                                 </button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-
-            {/* Hiển thị popup xác nhận xóa */}
-            <Popup 
-                isOpen={isPopupOpen} 
-                onClose={() => setIsPopupOpen(false)} 
+            <button
+                onClick={handleAddStatusClick}
+                className={styles.addButton}
+            >
+                Add Status
+            </button>
+            <Popup
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
                 title="Confirm Deletion"
-                onConfirm={handleConfirmDelete} // Thêm hàm xác nhận
+                onConfirm={handleConfirmDelete}
             >
                 <p>Are you sure you want to delete this status?</p>
             </Popup>
