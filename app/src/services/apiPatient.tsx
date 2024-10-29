@@ -4,7 +4,7 @@ import apiClient from '../Server/apiClient';
 // Định nghĩa kiểu dữ liệu cho thông tin cập nhật
 interface UpdatePatientInput {
     username?: string;
-    password?:string;
+    newPassword?: string;  // Mật khẩu mới
     phoneNumber?: string;
     email?: string;
     gender?: string;
@@ -27,7 +27,7 @@ const updatePatient = async (
 
         // Nếu có hình ảnh, thêm vào FormData
         if (imageUri && imageType) {
-            const imageName = imageUri.split('/').pop() || 'image.jpg'; // Lấy tên file từ đường dẫn
+            const imageName = imageUri.split('/').pop() || 'image.jpg';
             formData.append('image', {
                 uri: imageUri,
                 type: imageType,
@@ -35,14 +35,14 @@ const updatePatient = async (
             } as any);
         }
 
-        // Duyệt qua từng key trong updatedData
-        for (const key in updatedData) {
-            const value = updatedData[key as keyof UpdatePatientInput];
+        // Duyệt qua từng key trong updatedData và thêm vào FormData
+        Object.entries(updatedData).forEach(([key, value]) => {
             if (value !== undefined) {
                 formData.append(key, value);
             }
-        }
+        });
 
+        // Gửi yêu cầu cập nhật
         const response = await apiClient.put<{ message: string }>(url, formData);
         return response.data;
     } catch (error: any) {
@@ -54,6 +54,7 @@ const updatePatient = async (
         }
     }
 };
+
 
 // Hàm xóa bệnh nhân
 const deletePatient = (id: string): Promise<AxiosResponse> => {

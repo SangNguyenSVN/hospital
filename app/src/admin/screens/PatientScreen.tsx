@@ -69,9 +69,10 @@ const PatientScreen: React.FC = () => {
 
     // Navigate to the update screen with the selected patient ID
     const handleUpdateClick = (patient: Patient) => {
-        const patientData = encodeURIComponent(JSON.stringify(patient));
-        router.push(`/admin/dashboard/patient/update?patient=${patientData}`);
+        const encodedPatient = encodeURIComponent(JSON.stringify(patient));
+        router.push(`/admin/dashboard/patient/update?patient=${encodedPatient}`);
     };
+    
     
 
     const handleAddPatientClick = () => {

@@ -85,6 +85,7 @@ const updateAccount = async (password?: string, userType?: string): Promise<{ me
 const logout = async () => {
     try {
         await apiClient.post('/auth/logout');
+        localStorage.clear(); 
     } catch (error) {
         console.error('Lỗi đăng xuất:', error);
         throw error;

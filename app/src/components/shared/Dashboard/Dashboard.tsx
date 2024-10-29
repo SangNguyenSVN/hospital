@@ -1,8 +1,6 @@
-// src/components/dashboard/Dashboard.tsx
 import React from "react";
 import styles from "./Dashboard.module.scss";
-import { useRouter } from 'next/navigation'; // Import useRouter từ next/navigation
-import authService from "@/app/src/services/authService"; // Đường dẫn tới dịch vụ xác thực
+import authService from "@/app/src/services/authService"; 
 
 const itemDashboard = [
   { id: 1, name: 'Doctor', path: '/admin/dashboard/doctor' },
@@ -14,12 +12,9 @@ const itemDashboard = [
 ];
 
 const Dashboard = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter(); // Khởi tạo router
 
   const handleLogout = async () => {
     await authService.logout(); 
-    localStorage.clear(); // Hoặc sessionStorage.clear();
-    router.replace('/admin/login'); 
   };
 
   return (
