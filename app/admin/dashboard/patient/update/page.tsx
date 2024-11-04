@@ -247,9 +247,9 @@ const UpdatePatientPage: React.FC = () => {
           className={styles.select}
         >
           <option value="">Chọn giới tính</option>
-          <option value="male">Nam</option>
-          <option value="female">Nữ</option>
-          <option value="other">Khác</option>
+          <option value="Nam">Nam</option>
+          <option value="Nữ">Nữ</option>
+          <option value="Khác">Khác</option>
         </select>
         {errors.gender && <span className={styles.error}>{errors.gender}</span>}
       </div>

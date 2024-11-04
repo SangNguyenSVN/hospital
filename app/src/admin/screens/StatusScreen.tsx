@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/node_modules/next/navigation';
 import apiService from '../../services/apiService';
 import styles from '../styles/status.module.scss';
 import Popup from '../../components/shared/PopUp/PopUp';
