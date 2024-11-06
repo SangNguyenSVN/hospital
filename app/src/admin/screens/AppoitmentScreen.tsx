@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import apiAppointment from '../../services/apiAppoitment';
-import styles from '../styles/appointment.module.scss';
+import styles from '../styles/status.module.scss'; // chua co style cho appointment
 import Popup from '../../components/shared/PopUp/PopUp';
 
 interface Status {
@@ -14,7 +14,7 @@ interface Appointment {
     _id: string;
     fullname: string;
     email: string;
-    status: Status;
+    status: Status;// status la chuoi gom cac object
 }
 
 const AppointmentScreen: React.FC = () => {
@@ -66,8 +66,14 @@ const AppointmentScreen: React.FC = () => {
     };
 
     const handleUpdateClick = (appointment: Appointment) => {
-        router.push(`/admin/dashboard/appointment/update?id=${appointment._id}&fullname=${encodeURIComponent(appointment.fullname)}&email=${encodeURIComponent(appointment.email)}`);
+        const appointmentData = JSON.stringify(appointment);
+        const query = new URLSearchParams({
+            appointment: encodeURIComponent(appointmentData),
+        }).toString();
+    
+        router.push(`/admin/dashboard/appointment/update?${query}`);
     };
+    
 
     const handleAddAppointmentClick = () => {
         router.push(`/admin/dashboard/appointment/post`);
