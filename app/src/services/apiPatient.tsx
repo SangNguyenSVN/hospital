@@ -74,7 +74,7 @@ const getPatientById = async (id: string): Promise<AxiosResponse> => {
 };
 
 // Hàm tạo mới một bệnh nhân
-const createPatient = async (
+const createPatient = async ( 
     patientData: {
         username: string;
         password: string;

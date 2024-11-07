@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from '@/node_modules/next/navigation';
 import apiAppointment from '../../services/apiAppoitment';
-import styles from '../styles/appointment.module.scss';
+import styles from '../styles/status.module.scss';
 import Popup from '../../components/shared/PopUp/PopUp';
 
 interface Status {

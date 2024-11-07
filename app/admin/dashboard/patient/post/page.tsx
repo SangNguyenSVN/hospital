@@ -134,13 +134,14 @@ const CreatePatientPage: React.FC = () => {
         fullname: patientData.fullname,
         address: patientData.address,
         password: patientData.password,
-        image: patientData.image, // Chuyển đổi thành chuỗi base64 hoặc URL
-      };
+        image: patientData.image,
+      }; 
       console.log(newPatientData)
       const response = await apiPatient.createPatient(newPatientData);
       alert(response.message);
+      console.log(response)
 
-      router.push('/admin/dashboard/patient');
+      // router.push('/admin/dashboard/patient');
     } catch (error: any) {
       console.error('Error creating patient:', error);
       alert(error.message || 'Tạo bệnh nhân thất bại');
