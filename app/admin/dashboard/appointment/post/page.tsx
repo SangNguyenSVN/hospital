@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/node_modules/next/navigation";
 import styles from '../../../../src/styles/post.module.scss';
 import apiAppointment from "@/app/src/services/apiAppoitment";
 

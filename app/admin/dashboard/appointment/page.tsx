@@ -3,9 +3,7 @@ import AppointmentScreen from '@/app/src/admin/screens/AppoitmentScreen'
 
 const page = () => {
   return (
-    <div>
       <AppointmentScreen/>
-    </div>
   )
 }
 

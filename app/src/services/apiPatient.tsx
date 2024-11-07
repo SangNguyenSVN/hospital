@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import apiClient from '../Server/apiClient';
+import { getMimeType } from './mime';
 
 // Định nghĩa kiểu dữ liệu cho thông tin cập nhật
 interface UpdatePatientInput {
@@ -19,14 +20,14 @@ const updatePatient = async (
     id: string,
     updatedData: UpdatePatientInput,
     imageUri?: string,
-    imageType?: string,
 ): Promise<{ message: string }> => {
     try {
         const url = `/user/patients/${id}`;
         const formData = new FormData();
 
         // Nếu có hình ảnh, thêm vào FormData
-        if (imageUri && imageType) {
+        if (imageUri) {
+            const imageType = getMimeType(imageUri); // Lấy loại MIME từ URI
             const imageName = imageUri.split('/').pop() || 'image.jpg';
             formData.append('image', {
                 uri: imageUri,
@@ -73,7 +74,7 @@ const getPatientById = async (id: string): Promise<AxiosResponse> => {
 };
 
 // Hàm tạo mới một bệnh nhân
-const createPatient = async (
+const createPatient = async ( 
     patientData: {
         username: string;
         password: string;
@@ -86,15 +87,15 @@ const createPatient = async (
         image?: string;
     },
     imageUri?: string,
-    imageType?: string,
 ): Promise<{ message: string; patient: any }> => {
     try {
         const url = '/user/patients';
-
         const formData = new FormData();
 
-        if (imageUri && imageType) {
-            const imageName = imageUri.split('/').pop() || 'image.jpg'; // Lấy tên file từ đường dẫn
+        // Nếu có hình ảnh, thêm vào FormData
+        if (imageUri) {
+            const imageType = getMimeType(imageUri);
+            const imageName = imageUri.split('/').pop() || 'image.jpg';
             formData.append('image', {
                 uri: imageUri,
                 type: imageType,
@@ -102,14 +103,14 @@ const createPatient = async (
             } as any);
         }
 
-        // Duyệt qua từng key trong patientData
-        for (const key in patientData) {
-            const value = patientData[key as keyof typeof patientData];
+        // Duyệt qua từng key trong patientData và thêm vào FormData
+        Object.entries(patientData).forEach(([key, value]) => {
             if (value !== undefined) {
                 formData.append(key, value);
             }
-        }
+        });
 
+        // Gọi API để tạo mới bệnh nhân
         const response = await apiClient.post<{ message: string; patient: any }>(url, formData);
         return response.data;
     } catch (error: any) {
@@ -121,7 +122,6 @@ const createPatient = async (
         }
     }
 };
-
 // Xuất các hàm
 export default {
     updatePatient,

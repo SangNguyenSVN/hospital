@@ -17,6 +17,12 @@ const getNews = (): Promise<AxiosResponse> => {
 const getDepartments = (): Promise<AxiosResponse> => {
     return apiClient.get('/departments/')
 }
+const getMedicines = (): Promise<AxiosResponse> => {
+    return apiClient.get('/medicines/')
+}
+const getPackages = (): Promise<AxiosResponse> => {
+    return apiClient.get('/packages/')
+}
 
 
 // Hàm để lấy tất cả trạng thái
@@ -63,12 +69,15 @@ const apiService = {
     getDoctors,
     getNews,
     getDepartments,
+    getMedicines,
+    getPackages,
     postAppointment,
     getStatuses,
     getStatusById,
     createStatus,
     updateStatus,
-    deleteStatus
+    deleteStatus,
+    
 };
 
 export default apiService; 
