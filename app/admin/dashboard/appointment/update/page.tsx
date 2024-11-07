@@ -8,9 +8,11 @@ import apiService from "@/app/src/services/apiService";
 interface AppointmentData {
   doctor: string;
   package?: string;
+  status?: string;
   time: string;
-  date: any;
+  date: string;
   notes?: string;
+  reason?: string;
   fullname: string;
   email: string;
   phoneNumber: string;
@@ -22,57 +24,42 @@ interface StatusData {
 }
 
 function UpdateAppointmentPage() {
+  const searchParams = useSearchParams();
+  const appointmentData: any = searchParams.get('appointment');
+  const parsedData: any = JSON.parse(decodeURIComponent(appointmentData));
+  console.log("data appointment", parsedData);
+
   const [formData, setFormData] = useState<AppointmentData>({
-    doctor: '',
-    package: '',
-    time: '',
-    date: '',
-    notes: '',
-    fullname: '',
-    email: '',
-    phoneNumber: ''
+    doctor: parsedData.doctor?._id || '',
+    package: parsedData.package?._id || '',
+    status: parsedData.status?._id || '',
+    time: parsedData.time || '',
+    date: new Date(parsedData.date).toISOString().split("T")[0] || '',
+    notes: parsedData.notes || '',
+    reason: parsedData.reason || '',
+    fullname: parsedData.fullname || '',
+    email: parsedData.email || '',
+    phoneNumber: parsedData.phoneNumber || '',
   });
+
   const [doctorList, setDoctorList] = useState<any[]>([]);
   const [hospital, setHospital] = useState<any[]>([]);
   const [packages, setPackages] = useState<any[]>([]);
   const [status, setStatus] = useState<StatusData[]>([]);
-  const [selectedHospital, setSelectedHospital] = useState<string>("");
-  const [appointmentId, setAppointmentId] = useState<string>('');
+  const [selectedHospital, setSelectedHospital] = useState<string>(parsedData.doctor?.hospital || "");
+  const appointmentId = parsedData._id;
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const appointmentData = searchParams.get('appointment');  // Get appointment data from query params
 
   const getStatus = async () => {
-    const data = await apiService.getStatuses();
-    setStatus(data.data);
-    console.log("status data: ",data.data)
+    try {
+      const data = await apiService.getStatuses();
+      setStatus(data.data);
+      console.log("status data: ", data.data);
+    } catch (error) {
+      console.error("Error fetching status data:", error);
+    }
   };
 
-  useEffect(() => {
-    getStatus();
-    if (appointmentData) {
-      try {
-        const parsedData = JSON.parse(decodeURIComponent(appointmentData));
-        console.log("data appointment", parsedData)
-        setAppointmentId(parsedData._id);
-        setFormData({
-          doctor: parsedData.doctor || '',
-          package: parsedData.package || '',
-          time: parsedData.time || '',
-          date: parsedData.date,
-          notes: parsedData.notes || '',
-          fullname: parsedData.fullname || '',
-          email: parsedData.email || '',
-          phoneNumber: parsedData.phoneNumber || ''
-        });
-      } catch (error) {
-        console.error("Error parsing appointment data:", error);
-      }
-    }
-    getHospital();
-  }, [appointmentData]); // This effect depends on appointmentData
-
-  // Fetch hospital data
   const getHospital = async () => {
     try {
       const response = await apiAppointment.getHospitals();
@@ -82,7 +69,11 @@ function UpdateAppointmentPage() {
     }
   };
 
-  // Update form data when hospital changes
+  useEffect(() => {
+    getStatus();
+    getHospital();
+  }, []);
+
   const handleHospitalChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const hospitalId = e.target.value;
     setSelectedHospital(hospitalId);
@@ -93,40 +84,29 @@ function UpdateAppointmentPage() {
     }
   };
 
-  // Handle form data change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    
-    // Ensure time is in HH:mm format
-    if (name === 'time') {
-      const [hour, minute] = value.split(':');
-      const formattedTime = `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
-      setFormData(prevData => ({
-        ...prevData,
-        [name]: formattedTime
-      }));
-    } else {
-      setFormData(prevData => ({
-        ...prevData,
-        [name]: value
-      }));
-    }
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const statusId = e.target.value;
+    setFormData(prevData => ({ ...prevData, status: statusId }));
   };
 
-  // Handle form submission
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default form submission
-    console.log("id ", appointmentId)
-    console.log("data update", formData)
-    // try {
-    //   // Call API to update the appointment
-    //   await apiAppointment.updateAppointment(appointmentId, formData);
-    //   console.log("Appointment updated successfully");
-    //   // Redirect to another page if necessary
-    //   router.push('/appointments');
-    // } catch (error) {
-    //   console.error("Error updating appointment:", error);
-    // }
+    event.preventDefault();
+    console.log("data update: ", formData)
+    try {
+      await apiAppointment.updateAppointment(appointmentId, formData);
+      console.log("Appointment updated successfully");
+      router.push('/admin/dashboard/appointment');
+    } catch (error) {
+      console.error("Error updating appointment:", error);
+    }
   };
 
   return (
@@ -182,6 +162,22 @@ function UpdateAppointmentPage() {
           </select>
         </div>
         <div className={styles.formItem}>
+          <label>Status:</label>
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleStatusChange}
+            required
+          >
+            <option value="">Select a Status</option>
+            {status.map((status) => (
+              <option key={status._id} value={status._id}>
+                {status.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.formItem}>
           <label>Date:</label>
           <input
             type="date"
@@ -206,6 +202,14 @@ function UpdateAppointmentPage() {
           <textarea
             name="notes"
             value={formData.notes}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className={styles.formItem}>
+          <label>Reason:</label>
+          <textarea
+            name="reason"
+            value={formData.reason}
             onChange={handleInputChange}
           />
         </div>
