@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"; // Sử dụng next/navigation
 import { Button } from '@/components/ui/button'; // Thay đổi đường dẫn nếu cần
 import styles from './login.module.scss'; // Đường dẫn đến file CSS
 import authService from "@/app/src/services/authService";
+import MedicineScreen from "@/app/src/admin/screens/MedicineScreen";
 
 const login = () => {
   const [identifier, setIdentifier] = useState<string>('');
@@ -34,34 +35,7 @@ const login = () => {
   };
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <div className={styles.container_item}>
-          <input
-            className={styles.txt_input}
-            placeholder="Email"
-            type="text"
-            id="identifier"
-            value={identifier}
-            onChange={(e) => setIdentifier(e.target.value)}
-          />
-        </div>
-        <div className={styles.container_item}>
-          <input
-            className={styles.txt_input}
-            placeholder="Password"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className={styles.container_item}>
-          <Button type='submit' className={styles.button}>
-            <p className={styles.button_text}>Login</p>
-          </Button>
-        </div>
-      </form>
+     <MedicineScreen/>
     </div>
   )
 }
