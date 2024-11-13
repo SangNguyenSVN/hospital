@@ -1,0 +1,163 @@
+.licontainer {
+  display: flex;  /* Sử dụng Flexbox để bố trí các phần tử con theo dạng dòng */
+  justify-content: space-around; /* Điều chỉnh khoảng cách giữa các phần tử con */
+  align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+  width: 100%; /* Làm cho phần tử chứa chiếm đầy rộng của phần tử cha */
+  align-self: center; /* Căn giữa phần tử này trong bố cục cha */
+}
+
+.index {
+  font-weight: bold; /* Làm đậm chữ của chỉ số */
+  font-size: 1.2rem; /* Điều chỉnh kích thước font chữ */
+  color: #007bff; /* Đặt màu chữ là màu xanh dương */
+  margin-right: 10px; /* Thêm khoảng cách bên phải của số chỉ mục */
+  display: inline-block; /* Đảm bảo số chỉ mục sẽ hiển thị cùng dòng với tên phần tử */
+  background-color: #f0f0f0; /* Đặt màu nền cho số chỉ mục để làm nổi bật */
+  padding: 5px 10px; /* Thêm khoảng cách bên trong (padding) cho số chỉ mục */
+  border-radius: 5px; /* Bo góc số chỉ mục */
+  text-align: center; /* Căn giữa văn bản trong khối chứa số chỉ mục */
+  width: 30px; /* Đặt chiều rộng cố định cho số chỉ mục */
+  height: 30px; /* Đặt chiều cao cố định cho số chỉ mục */
+  line-height: 30px; /* Căn giữa văn bản theo chiều dọc trong số chỉ mục */
+}
+
+.licontainer h5 {
+  width: 25%; /* Đặt chiều rộng cho phần tử h5 là 25% */
+  border-left: 1px solid black; /* Thêm đường viền bên trái cho phần tử h5 */
+  border-inline-start: 1px solid black; /* Tùy chọn: Thêm đường viền bên trái */
+  padding: 5px; /* Thêm khoảng cách bên trong (padding) cho phần tử h5 */
+  margin: 0; /* Loại bỏ khoảng cách ngoài (margin) của phần tử h5 */
+}
+
+
+.ulcontainer{
+padding-bottom: 5px;
+  padding-top: 5px;
+  background: #f9f9f9; // Màu nền cho mỗi mục
+  border: 1px solid #ddd; // Đường viền cho mỗi mục
+  border-radius: 5px; // Bo góc
+}
+
+.container {
+  width: 90%; /* Container width */
+  border-radius: 10px; /* Bo tròn góc */
+  background: #f9f9f9; /* Màu nền sáng */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Rounded corners */
+   /* Background color */
+  padding: 20px; /* Optional: Add padding for better spacing */
+  margin: auto; /* Center the container on the page */
+}
+.deletebutton {
+  width: 22%;
+  margin-left: 1%;
+  background-color: red; /* Màu nền đỏ */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không viền */
+  border-radius: 5px; /* Bo tròn góc */
+  padding: 10px 15px; /* Khoảng cách bên trong */
+  cursor: pointer; /* Con trỏ biến thành bàn tay khi hover */
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.deletebutton:hover {
+  background-color: darkred; /* Màu nền khi hover */
+}
+
+
+.editbutton {
+  width: 22%;
+  margin-right: 1%;
+  background-color: blue; /* Màu nền xanh dương */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không viền */
+  border-radius: 5px; /* Bo tròn góc */
+  padding: 10px 15px; /* Khoảng cách bên trong */
+  cursor: pointer; /* Con trỏ biến thành bàn tay khi hover */
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.editbutton:hover {
+  background-color: darkblue; /* Màu nền khi hover */
+}
+
+.addcontainer{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+
+  
+}
+
+.addbutton {
+  background-color: green; /* Màu nền xanh lá cây */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không viền */
+  border-radius: 5px; /* Bo tròn góc */
+  padding: 10px 15px; /* Khoảng cách bên trong */
+  cursor: pointer; /* Con trỏ biến thành bàn tay khi hover */
+  margin-bottom: 20px; /* Khoảng cách dưới nút */
+  transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
+  
+ 
+}
+
+.addbutton:hover {
+  background-color: darkgreen; /* Màu nền khi hover */
+}
+
+
+.title {
+  font-size: 2rem; /* Kích thước chữ lớn */
+  color: #333; /* Màu chữ */
+  text-align: center; /* Căn giữa */
+  margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+.subtitle {
+  font-size: 1.5rem; /* Kích thước chữ nhỏ hơn */
+  color: #666; /* Màu chữ nhạt hơn */
+  text-align: left; /* Căn trái */
+  margin-bottom: 10px; /* Khoảng cách dưới */
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); // Nền mờ
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; // Đảm bảo popup ở trên cùng
+}
+
+.popupContent {
+  background: white;
+  padding: 70px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  width: 300px; // Kích thước của popup
+}
+
+.popupContent h2 {
+  margin-bottom: 15px; // Khoảng cách dưới tiêu đề
+}
+
+.popupContent label {
+  display: block; // Hiển thị nhãn dưới dạng block
+  margin-bottom: 10px; // Khoảng cách giữa các nhãn
+}
+
+.popupContent input {
+  width: 100%; // Chiều rộng 100%
+  padding: 8px; // Padding cho input
+  margin-bottom: 10px; // Khoảng cách dưới input
+}
+
+.popupContent button {
+  margin-right: 10px; // Khoảng cách giữa các nút
+  
+  
+}
