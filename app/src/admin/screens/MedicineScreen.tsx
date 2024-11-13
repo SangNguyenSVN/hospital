@@ -43,6 +43,10 @@ const MedicineScreen = () => {
   const [IsAdding, setIsAdding] = useState(false); 
   const [newMedicine, setNewMedicine] = useState<NewMedicine>({ name: '', quantity: 0, price: 0, category: categories[0]});
 
+  const containsSpecialChars = (str: string) => {
+    const specialCharPattern = /[^a-zA-Z0-9\s]/;  // Kiểm tra ký tự không phải chữ cái, số và khoảng trắng
+    return specialCharPattern.test(str);
+  };
   const handleEditClick = (item:any) => {
     setCurrentMedicine(item); 
     setIsEditing(true); 
@@ -81,6 +85,11 @@ const MedicineScreen = () => {
   };
   const handleSSubmit  =  async (e: React.FormEvent)=>{
       e.preventDefault();
+
+      if (containsSpecialChars(currentMedicine?.name || newMedicine.name)) {
+        alert('Tên thuốc không được chứa ký tự đặc biệt!');
+        return;  // Không thực hiện thêm hoặc cập nhật nếu có ký tự đặc biệt
+      }
       if (currentMedicine){
         try {
           const response = await apiMedicine.updateMedicine(currentMedicine._id,currentMedicine);
