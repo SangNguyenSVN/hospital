@@ -62,10 +62,11 @@ const HospitalScreen: React.FC = () => {
   };
 
   const handleUpdateClick = (hospital: Hospital) => {
+    console.log(hospital)
     const encodedHospital = encodeURIComponent(JSON.stringify(hospital));
     router.push(`/admin/dashboard/hospital/update?hospital=${encodedHospital}`);
   };
-
+ 
   const handleAddHospitalClick = () => {
     router.push(`/admin/dashboard/hospital/post`);
   };
