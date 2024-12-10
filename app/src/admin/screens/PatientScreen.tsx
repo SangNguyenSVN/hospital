@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import apiPatient from '../../services/apiPatient';
-import styles from '../styles/patient.module.scss'; // Thay đổi tên file CSS nếu cần
+import styles from '../styles/patient.module.scss'; 
+import sharedStyles from '../styles/shared.module.scss';  // Import shared styles
 import Popup from '../../components/shared/PopUp/PopUp';
 
 interface Patient {
@@ -17,7 +18,6 @@ interface Patient {
     address?: string;
     image?: string;
 }
-
 
 const PatientScreen: React.FC = () => {
     const [patients, setPatients] = useState<Patient[]>([]);
@@ -72,39 +72,37 @@ const PatientScreen: React.FC = () => {
         const encodedPatient = encodeURIComponent(JSON.stringify(patient));
         router.push(`/admin/dashboard/patient/update?patient=${encodedPatient}`);
     };
-    
-    
 
     const handleAddPatientClick = () => {
         router.push(`/admin/dashboard/patient/post`);
     };
 
     return (
-        <div>
-            <h1>Patient Management</h1>
+        <div className={sharedStyles.container}>
+            <h1 className={sharedStyles.title}>Patient Management</h1>
 
-            {loading && <p>Loading patients...</p>}
-            {error && <p className={styles.error}>{error}</p>}
+            {loading && <p className={sharedStyles.loading}>Loading patients...</p>}
+            {error && <p className={sharedStyles.error}>{error}</p>}
 
-            <h2>Current Patients:</h2>
-            <table className={styles.table}>
+            <h2 className={sharedStyles.subtitle}>Current Patients:</h2>
+            <table className={sharedStyles.table}>
                 <thead>
                     <tr>
-                        <th className={styles.th}>Index</th>
-                        <th className={styles.th}>Full Name</th>
-                        <th className={styles.th}>Email</th>
-                        <th className={styles.th}>Phone Number</th>
-                        <th className={styles.th}>Actions</th>
+                        <th className={sharedStyles.th}>Index</th>
+                        <th className={sharedStyles.th}>Full Name</th>
+                        <th className={sharedStyles.th}>Email</th>
+                        <th className={sharedStyles.th}>Phone Number</th>
+                        <th className={sharedStyles.th}>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {patients.map((patient: Patient, index) => (
                         <tr key={patient._id}>
-                            <td className={styles.td}>{index + 1}</td>
-                            <td className={styles.td}>{patient.fullname}</td>
-                            <td className={styles.td}>{patient.email}</td>
-                            <td className={styles.td}>{patient.phoneNumber}</td>
-                            <td className={styles.td}>
+                            <td className={sharedStyles.td}>{index + 1}</td>
+                            <td className={sharedStyles.td}>{patient.fullname}</td>
+                            <td className={sharedStyles.td}>{patient.email}</td>
+                            <td className={sharedStyles.td}>{patient.phoneNumber}</td>
+                            <td className={sharedStyles.td}>
                                 <button
                                     onClick={() => openPopup(patient._id)}
                                     className={styles.deleteButton}
@@ -124,7 +122,7 @@ const PatientScreen: React.FC = () => {
             </table>
             <button
                 onClick={handleAddPatientClick}
-                className={styles.addButton}
+                className={sharedStyles.button}
             >
                 Add Patient
             </button>

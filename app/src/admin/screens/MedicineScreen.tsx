@@ -1,9 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
 import styles from '../styles/medicine.module.scss'
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/router';
-import axios from 'axios';
 import apiMedicine from '../../services/apiMedicine';
 
 interface Category {
@@ -118,11 +115,11 @@ const MedicineScreen = () => {
     const fetchMedicines = async () => {
       setLoading(true); 
       try {
-        const response = await apiMedicine.getAllMedicine();
+        const medicinesresponse = await apiMedicine.getAllMedicine();
         const categoryResponse = await apiMedicine.getAllTypeMedicine();
         setcategories(categoryResponse.data)
-        setMedicines(response.data); 
-        console.log("Dữ liệu thuốc:", response.data); 
+        setMedicines(medicinesresponse.data); 
+        console.log("Dữ liệu thuốc:", medicinesresponse.data); 
       } catch (err) {
         console.error("Error while fetching medicines:"); 
       } finally {
@@ -147,8 +144,7 @@ return(
       <h5>Tên thuốc</h5>
       <h5> Giá</h5>
       <h5>Số lượng</h5>
-      <button className={styles.editbutton}></button>
-      <button className={styles.deletebutton}></button>
+      <h5>Actions</h5>
     </li>
   </ul>
 {medicines.map((item,index)=>(

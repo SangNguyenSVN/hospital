@@ -5,25 +5,24 @@ import { AxiosResponse } from "axios";
 
 
 const getAllMedicine  = (): Promise<AxiosResponse> =>{
-    return apiClient.get(`/medicine/getall`)
+    return apiClient.get(`/medicines/`)
 }
 
 const getAllTypeMedicine = (): Promise<AxiosResponse> =>{
-    
-        return apiClient.get(`/category/getall`)
+        return apiClient.get(`/categories/`)
     
 }
 
 const deleteMedicine = (id: String): Promise<AxiosResponse> =>{
-    return apiClient.delete(`/medicine/${id}`)
+    return apiClient.delete(`/medicines/${id}`)
 }
 
 const updateMedicine = (id:String , data: any) : Promise<AxiosResponse>=>{
-    return apiClient.put(`/medicine/update/${id}`,data)
+    return apiClient.put(`/medicines/${id}`,data)
 }
 
 const addMedicine = (data: any): Promise<AxiosResponse> =>{
-    return apiClient.post(`/medicine/add/`,data)
+    return apiClient.post(`/medicines/`,data)
 }
 
 const apiMedicine = {

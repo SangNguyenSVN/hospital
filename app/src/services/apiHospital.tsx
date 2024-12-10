@@ -23,7 +23,9 @@ const deleteHospital = (id: string): Promise<AxiosResponse> => {
 const getHospital = async (): Promise<AxiosResponse> => {
     return apiClient.get('/hospitals');
 };
-
+const getHospitalByID = async (id: string): Promise<AxiosResponse> => {
+    return apiClient.get(`hospitals/${id}`);
+};
 const createHospital = async (
     hospitalData: Hospital,
     imageUri?: string
@@ -107,5 +109,6 @@ export default {
     deleteHospital,
     getHospital,
     createHospital,
-    updateHospital
+    updateHospital,
+    getHospitalByID
 };
