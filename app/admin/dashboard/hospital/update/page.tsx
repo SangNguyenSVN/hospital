@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import apiService from "@/app/src/services/apiService";
 import styles from "../post/post.module.scss";
-import { accessSync } from "fs";
 import apiHospital from "@/app/src/services/apiHospital";
 
 interface HospitalUpdate {
@@ -33,7 +32,7 @@ const Page = () => {
     location: hospitalData.location || "",
     phoneNumber: hospitalData.phoneNumber || "",
     email: hospitalData.email || "",
-    doctors: hospitalData.doctors.map((doc: any) => doc._id) || [], // chỉ lấy _id
+    doctors: hospitalData.doctors.map((doc: any) => doc._id) || [], 
     departments: hospitalData.departments.map((dept: any) => dept._id) || [],
     medicines: hospitalData.medicines.map((med: any) => med._id) || [],
     packages: hospitalData.packages.map((pkg: any) => pkg._id) || [],
@@ -93,7 +92,7 @@ const Page = () => {
     getMedicine();
     getPackage();
   }, []);
-
+ 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Data update: ", hospitalDataHolder);
@@ -101,7 +100,7 @@ const Page = () => {
     try {
       const response : any = await apiHospital.updateHospital(hospitalId, hospitalDataHolder)
       console.log(response)
-      alert(response.message)
+      alert(response.message);
     } catch (error) {
       console.log('Error in page update: ', error)
     }

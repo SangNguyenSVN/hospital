@@ -1,62 +1,122 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import apiClient from '../Server/apiClient';
+import { getMimeType } from './mime';
 
 // Định nghĩa kiểu dữ liệu cho thông tin cập nhật bác sĩ
 interface UpdateDoctorInput {
-    fullname?: string;
+    username?: string;
+    newPassword?: string; // Mật khẩu mới
     phoneNumber?: string;
     email?: string;
-    specialty?: string;
     gender?: string;
     dateOfBirth?: string;
+    fullname?: string;
+    specialty?: string; // Chuyên môn
+    address?: string;
     image?: string;
 }
 
-// Hàm để cập nhật thông tin bác sĩ
+// Hàm cập nhật bác sĩ
 const updateDoctor = async (
+    id: string,
     updatedData: UpdateDoctorInput,
     imageUri?: string,
-    imageType?: string,
 ): Promise<{ message: string }> => {
     try {
-        const url = '/user/doctors/update'; // URL cho API cập nhật bác sĩ
-
-        console.log('URL:', url);
-        console.log("Data", updatedData);
-
+        const url = `/user/doctors/${id}`;
         const formData = new FormData();
 
-        console.log('FormData:', formData); // Log FormData trước khi gửi yêu cầu
-        console.log('imageUri:', imageUri);
-        console.log('imageType:', imageType);
-        
-        // Nếu có hình ảnh, thêm nó vào FormData
-        if (imageUri && imageType) {
-            const imageName = imageUri.split('/').pop() || 'image.jpg'; // Lấy tên file từ đường dẫn
+        // Nếu có hình ảnh, thêm vào FormData
+        if (imageUri) {
+            const imageType = getMimeType(imageUri);
+            const imageName = imageUri.split('/').pop() || 'image.jpg';
             formData.append('image', {
-                uri: imageUri,          // Đường dẫn tệp hình ảnh trên thiết bị
-                type: imageType,        // Loại MIME của ảnh, ví dụ: 'image/jpeg'
-                name: imageName,        // Tên của tệp ảnh
+                uri: imageUri,
+                type: imageType,
+                name: imageName,
             } as any);
         }
 
-        // Duyệt qua từng key trong updatedData
-        for (const key in updatedData) {
-            const value = updatedData[key as keyof UpdateDoctorInput];
+        // Duyệt qua từng key trong updatedData và thêm vào FormData
+        Object.entries(updatedData).forEach(([key, value]) => {
             if (value !== undefined) {
                 formData.append(key, value);
             }
-        }
+        });
 
+        // Gửi yêu cầu cập nhật
         const response = await apiClient.put<{ message: string }>(url, formData);
-
-        return response.data; // Trả về dữ liệu nhận được
-    } catch (error) {
+        return response.data;
+    } catch (error: any) {
         console.error('Lỗi khi cập nhật bác sĩ:', error);
-
-        // Xử lý lỗi
         if (axios.isAxiosError(error) && error.response) {
             throw new Error(error.response.data.message || 'Cập nhật bác sĩ thất bại');
+        } else {
+            throw new Error('Đã xảy ra lỗi không xác định');
+        }
+    }
+};
+
+// Hàm xóa bác sĩ
+const deleteDoctor = (id: string): Promise<AxiosResponse> => {
+    return apiClient.delete(`/user/doctors/${id}`);
+};
+
+// Hàm lấy danh sách bác sĩ
+const getDoctors = async (): Promise<AxiosResponse> => {
+    return apiClient.get('/user/doctors');
+};
+
+// Hàm lấy thông tin chi tiết một bác sĩ
+const getDoctorById = async (id: string): Promise<AxiosResponse> => {
+    return apiClient.get(`/user/doctors/${id}`);
+};
+
+// Hàm tạo mới một bác sĩ
+const createDoctor = async (
+    doctorData: {
+        username: string;
+        password: string;
+        phoneNumber: string;
+        email: string;
+        gender: string;
+        dateOfBirth: string;
+        fullname: string;
+        specialty: string;
+        address: string;
+        image?: string;
+    },
+    imageUri?: string,
+): Promise<{ message: string; doctor: any }> => {
+    try {
+        const url = '/user/doctors';
+        const formData = new FormData();
+
+        // Nếu có hình ảnh, thêm vào FormData
+        if (imageUri) {
+            const imageType = getMimeType(imageUri);
+            const imageName = imageUri.split('/').pop() || 'image.jpg';
+            formData.append('image', {
+                uri: imageUri,
+                type: imageType,
+                name: imageName,
+            } as any);
+        }
+
+        // Duyệt qua từng key trong doctorData và thêm vào FormData
+        Object.entries(doctorData).forEach(([key, value]) => {
+            if (value !== undefined) {
+                formData.append(key, value);
+            }
+        });
+
+        // Gọi API để tạo mới bác sĩ
+        const response = await apiClient.post<{ message: string; doctor: any }>(url, formData);
+        return response.data;
+    } catch (error: any) {
+        console.error('Lỗi khi tạo bác sĩ:', error);
+        if (axios.isAxiosError(error) && error.response) {
+            throw new Error(error.response.data.message || 'Tạo bác sĩ thất bại');
         } else {
             throw new Error('Đã xảy ra lỗi không xác định');
         }
@@ -66,4 +126,8 @@ const updateDoctor = async (
 // Xuất các hàm
 export default {
     updateDoctor,
+    deleteDoctor,
+    getDoctors,
+    getDoctorById,
+    createDoctor,
 };

@@ -3,6 +3,7 @@ import styles from "./Dashboard.module.scss";
 import authService from "@/app/src/services/authService"; 
 
 const itemDashboard = [
+  { id: 0, name: 'Overview', path: '/admin/dashboard/overview' },
   { id: 1, name: 'Doctor', path: '/admin/dashboard/doctor' },
   { id: 2, name: 'Patient', path: '/admin/dashboard/patient' },
   { id: 3, name: 'Appointment', path: '/admin/dashboard/appointment' },

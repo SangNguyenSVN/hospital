@@ -23,34 +23,33 @@ const deleteHospital = (id: string): Promise<AxiosResponse> => {
 const getHospital = async (): Promise<AxiosResponse> => {
     return apiClient.get('/hospitals');
 };
-
+const getHospitalByID = async (id: string): Promise<AxiosResponse> => {
+    return apiClient.get(`hospitals/${id}`);
+};
 const createHospital = async (
-    hospitalData: Hospital, // Dữ liệu bệnh viện
-    imageUri?: string, // URI của hình ảnh bệnh viện (nếu có)
+    hospitalData: Hospital,
+    imageUri?: string
 ): Promise<{ message: string; hospital: any }> => {
     try {
-        const url = '/hospitals/'; // URL của API để tạo bệnh viện
+        const url = '/hospitals/';
         const formData = new FormData();
 
-        // Nếu có hình ảnh bệnh viện, thêm vào FormData
         if (imageUri) {
-            const imageType = getMimeType(imageUri); // Lấy MIME type từ URI
-            const imageName = imageUri.split('/').pop() || 'image.jpg'; // Tên hình ảnh
+            const imageType = getMimeType(imageUri);
+            const imageName = imageUri.split('/').pop() || 'image.jpg';
             formData.append('image', {
                 uri: imageUri,
-                type: imageType, // MIME type của hình ảnh
+                type: imageType,
                 name: imageName,
-            } as any); // Dùng 'any' để ép kiểu
+            } as any);
         }
 
-        // Duyệt qua từng key trong hospitalData và thêm vào FormData
         Object.entries(hospitalData).forEach(([key, value]) => {
-            if (value !== undefined) {
+            if (value !== undefined && value !== null && value !== '') { // Skip empty values
                 formData.append(key, value);
             }
         });
 
-        // Gửi dữ liệu bệnh viện đến API
         const response = await apiClient.post<{ message: string; hospital: any }>(url, formData);
         return response.data;
     } catch (error: any) {
@@ -63,42 +62,36 @@ const createHospital = async (
     }
 };
 
-// Hàm cập nhật thông tin bệnh viện
 const updateHospital = async (
-    id: string, // ID bệnh viện cần cập nhật
-    hospitalData: Hospital, // Dữ liệu bệnh viện
-    imageUri?: string // URI của hình ảnh mới (nếu có)
+    id: string,
+    hospitalData: Hospital,
+    imageUri?: string
 ): Promise<{ message: string; hospital: any }> => {
     try {
-        const url = `/hospitals/${id}`; // URL API cập nhật bệnh viện, sử dụng ID bệnh viện
+        const url = `/hospitals/${id}`;
         const formData = new FormData();
 
-        // Nếu có hình ảnh mới, thêm vào FormData
         if (imageUri) {
-            const imageType = getMimeType(imageUri); // Lấy MIME type từ URI
-            const imageName = imageUri.split('/').pop() || 'image.jpg'; // Tên hình ảnh
+            const imageType = getMimeType(imageUri);
+            const imageName = imageUri.split('/').pop() || 'image.jpg';
             formData.append('image', {
                 uri: imageUri,
-                type: imageType, // MIME type của hình ảnh
+                type: imageType,
                 name: imageName,
-            } as any); // Dùng 'any' để ép kiểu
+            } as any);
         }
 
-        // Duyệt qua từng key trong hospitalData và thêm vào FormData
         Object.entries(hospitalData).forEach(([key, value]) => {
-            if (value !== undefined) {
+            if (value !== undefined && value !== null && value !== '') {
                 if (Array.isArray(value)) {
-                    // Nếu là mảng, thêm từng phần tử vào FormData
-                    value.forEach(item => {
-                        formData.append(key, item);
-                    });
+                    // Append the array as a JSON string
+                    formData.append(key, JSON.stringify(value));
                 } else {
                     formData.append(key, value);
                 }
             }
         });
 
-        // Gửi yêu cầu cập nhật bệnh viện đến API
         const response = await apiClient.put<{ message: string; hospital: any }>(url, formData);
         return response.data;
     } catch (error: any) {
@@ -112,10 +105,10 @@ const updateHospital = async (
 };
 
 
-
 export default {
     deleteHospital,
     getHospital,
     createHospital,
-    updateHospital
+    updateHospital,
+    getHospitalByID
 };

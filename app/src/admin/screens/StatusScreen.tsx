@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { useRouter } from '@/node_modules/next/navigation';
+import { useRouter } from 'next/navigation';
 import apiService from '../../services/apiService';
-import styles from '../styles/status.module.scss';
+import styles from '../styles/shared.module.scss';
 import Popup from '../../components/shared/PopUp/PopUp';
 
 interface Status {
@@ -66,13 +66,13 @@ const StatusScreen: React.FC = () => {
         router.push(`/admin/dashboard/status/post`);
     };
     return (
-        <div>
-            <h1>Status Management</h1>
+        <div className={styles.container}>
+            <h1 className={styles.title}>Status Management</h1>
 
-            {loading && <p>Loading statuses...</p>}
+            {loading && <p className={styles.loading}>Loading statuses...</p>}
             {error && <p className={styles.error}>{error}</p>}
 
-            <h2>Current Statuses:</h2>
+            <h2 className={styles.subtitle}>Current Statuses:</h2>
             <table className={styles.table}>
                 <thead>
                     <tr>

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import apiHospital from '../../services/apiHospital';
 import { useRouter } from 'next/navigation';
-import styles from '../styles/hospital.module.scss';
+import styles from '../styles/shared.module.scss';  // Giữ nguyên đường dẫn đến shared.module.scss
 import Popup from '../../components/shared/PopUp/PopUp';
 
 interface Hospital {
@@ -62,22 +62,23 @@ const HospitalScreen: React.FC = () => {
   };
 
   const handleUpdateClick = (hospital: Hospital) => {
+    console.log(hospital);
     const encodedHospital = encodeURIComponent(JSON.stringify(hospital));
     router.push(`/admin/dashboard/hospital/update?hospital=${encodedHospital}`);
   };
-
+ 
   const handleAddHospitalClick = () => {
     router.push(`/admin/dashboard/hospital/post`);
   };
 
   return (
-    <div>
-      <h1>Hospital Management</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Hospital Management</h1>
 
-      {loading && <p>Loading hospitals...</p>}
+      {loading && <p className={styles.loading}>Loading hospitals...</p>}
       {error && <p className={styles.error}>{error}</p>}
 
-      <h2>Current Hospitals:</h2>
+      <h2 className={styles.subtitle}>Current Hospitals:</h2>
       <table className={styles.table}>
         <thead>
           <tr>
@@ -98,13 +99,13 @@ const HospitalScreen: React.FC = () => {
               <td className={styles.td}>
                 <button
                   onClick={() => handleUpdateClick(hospital)}
-                  className={styles.updateButton}
+                  className={styles.updateButton}  // Giữ nguyên .button để sử dụng cho các nút
                 >
                   Update
                 </button>
                 <button
                   onClick={() => openPopup(hospital._id)}
-                  className={styles.deleteButton}
+                  className={styles.deleteButton}  // Giữ nguyên .button để sử dụng cho các nút
                 >
                   Delete
                 </button>
@@ -115,7 +116,7 @@ const HospitalScreen: React.FC = () => {
       </table>
       <button
         onClick={handleAddHospitalClick}
-        className={styles.addButton}
+        className={styles.addButton}  // Giữ nguyên .button cho nút Add Hospital
       >
         Add Hospital
       </button>
