@@ -27,7 +27,6 @@ function UpdateAppointmentPage() {
   const searchParams = useSearchParams();
   const appointmentData: any = searchParams.get('appointment');
   const parsedData: any = JSON.parse(decodeURIComponent(appointmentData));
-  console.log("data appointment", parsedData);
 
   const [formData, setFormData] = useState<AppointmentData>({
     doctor: parsedData.doctor?._id || '',

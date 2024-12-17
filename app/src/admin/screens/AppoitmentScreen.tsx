@@ -62,7 +62,8 @@ const AppointmentScreen: React.FC = () => {
   };
 
   const handleUpdateClick = (appointment: Appointment) => {
-    router.push(`/admin/dashboard/appointment/update?id=${appointment._id}&fullname=${encodeURIComponent(appointment.fullname)}&email=${encodeURIComponent(appointment.email)}`);
+    const encodedAppointment = encodeURIComponent(JSON.stringify(appointment));
+    router.push(`/admin/dashboard/appointment/update?appointment=${encodedAppointment}`);
   };
 
   const handleAddAppointmentClick = () => {
