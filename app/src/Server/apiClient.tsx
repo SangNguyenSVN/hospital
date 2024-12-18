@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Địa chỉ API của bạn
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'https://server-cookies-break.vercel.app/api';
 
 // Tạo một instance của axios với baseURL
 const apiClient = axios.create({
